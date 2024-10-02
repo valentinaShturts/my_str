@@ -73,7 +73,7 @@ int MyString::MyStrlen()
 
 void MyString::MyStrCat(MyString& b)
 {
-	int cat_size = this->length + b.length;
+	int cat_size = this->length + b.length + 1;
 	char* cat = new char[cat_size];
 	for (int i = 0; i < this->length; i++)
 	{
