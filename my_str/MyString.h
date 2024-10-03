@@ -22,7 +22,7 @@ public:
 	MyString operator+(MyString& b);
 	MyString operator++(int);
 	MyString operator--(int);
-	MyString operator+=(int b);
+	MyString& operator+=(int b);
 	MyString operator-=(int b);
 	bool operator>(MyString& b);
 	bool operator<(MyString& b);

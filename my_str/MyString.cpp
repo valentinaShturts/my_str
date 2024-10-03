@@ -177,20 +177,26 @@ MyString MyString::operator--(int)
 	return temp;
 }
 
-MyString MyString::operator+=(int b)
+MyString& MyString::operator+=(int b)
 {
 	int l = this->length + b;
-	MyString temp(l);
-	for (int i = 0; i < this->length; i++)
+	char* s = new char[l+1];
+
+	for (int i = 0; i < this->length; i++) 
 	{
-		temp.str[i] = this->str[i];
+		s[i] = this->str[i];
 	}
-	for (int i = this->length; i < l; i++)
+	for (int i = this->length; i < l; i++) 
 	{
-		temp.str[i] = '0';
+		s[i] = '0';
 	}
-	temp.str[l] = '\0';
-	return temp;
+	s[l] = '\0';
+
+	delete[] this->str;
+	this->str = s;
+	this->length = l;
+
+	return *this;
 }
 
 MyString MyString::operator-=(int b)
