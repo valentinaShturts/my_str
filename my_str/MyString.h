@@ -20,10 +20,10 @@ public:
 	void MyDelChr(char c);
 	int MyStrCmp(MyString& b);
 	MyString operator+(MyString& b);
-	MyString operator++(int);
-	MyString operator--(int);
+	MyString& operator++();
+	MyString& operator--();
 	MyString& operator+=(int b);
-	MyString operator-=(int b);
+	MyString& operator-=(int b);
 	bool operator>(MyString& b);
 	bool operator<(MyString& b);
 	bool operator==(MyString& b);

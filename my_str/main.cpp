@@ -1,4 +1,4 @@
-#include "MyString.h"
+﻿#include "MyString.h"
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -17,7 +17,8 @@ int main()
 	cout << "index of 'a': " << line.MyChr('a') << endl;
 	cout << "Does line2 contain 'gad': " <<line2.MyStrStr("gad") << endl;
 	line.MyDelChr('d');
-	cout << "Deleting 'd': " << line.Print();
+	cout << "Deleting 'd': ";
+	line.Print();
 	cout << "my line2 & line cmp: " << line2.MyStrCmp(line) << endl;
 
 
@@ -48,4 +49,9 @@ int main()
 	{
 		cout << "line1 != line2" << std::endl;
 	}
+
+	line.MyStrCat(line2);
+	cout << "Length: " << line.MyStrlen() << endl;
+	line.Print();
+
 }

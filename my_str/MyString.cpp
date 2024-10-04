@@ -21,9 +21,9 @@ MyString::MyString(int size)
 
 MyString::MyString(const char* s)
 {
-	length = strlen(s) +1;
-	str = new char[length];
-	strcpy_s(str, length, s);
+	length = strlen(s);
+	str = new char[length+1];
+	strcpy_s(str, length+1, s);
 	obj_сount++;
 }
 
@@ -58,9 +58,10 @@ void MyString::Print() const
 
 void MyString::MyStrcpy(MyString& obj)
 {
+	delete[] this->str;
 	this->length = obj.length;
-	this->str = new char[this->length];
-	strcpy_s(this->str,this->length, obj.str);
+	this->str = new char[this->length+1];
+	strcpy_s(this->str,this->length+1, obj.str);
 }
 
 bool MyString::MyStrStr(const char* s)
@@ -98,11 +99,11 @@ int MyString::MyStrlen()
 
 void MyString::MyStrCat(MyString& b)
 {
-	int cat_length = length + b.length+1;
+	int cat_length = length + b.length;
 
-	char* cat = new char[cat_length];
-	strcpy_s(cat, cat_length, str);
-	strcat_s(cat, cat_length, b.str);
+	char* cat = new char[cat_length+1];
+	strcpy_s(cat, cat_length+1, str);
+	strcat_s(cat, cat_length+1, b.str);
 	delete[] str;
 	str = cat;
 	length = cat_length;
@@ -111,28 +112,29 @@ void MyString::MyStrCat(MyString& b)
 
 void MyString::MyDelChr(char c)
 {
-	if (str == nullptr) return;
+	if (str == nullptr) return; 
 
-	int new_length = 1;
+	int new_length = 0;
 	for (int i = 0; i < length; i++) 
 	{
-		if (str[i] != c) new_length++;
+		if (str[i] != c) 
+		{
+			new_length++;
+		}
 	}
-
 	if (new_length == length) return;
 
-	char* s = new char[new_length];
+	char* s = new char[new_length + 1];  
 	int j = 0;
 	for (int i = 0; i < length; i++) 
 	{
 		if (str[i] != c) 
 		{
-			s[j] = str[i]; 
+			s[j] = str[i];
 			j++;
 		}
-
 	}
-	s[new_length-1] = '\0';
+	s[new_length] = '\0';
 
 	delete[] str;
 	str = s;
@@ -142,7 +144,7 @@ void MyString::MyDelChr(char c)
 
 int MyString::MyStrCmp(MyString& b)
 {
-	int result = strcmp(str, b.str);
+	int result = strcmp(b.str, this->str);
 	return result;
 }
 
@@ -154,39 +156,54 @@ MyString MyString::operator+(MyString& b)
 	return temp;
 }
 
-MyString MyString::operator++(int)
+MyString& MyString::operator++()
 {
-	MyString temp(this->length + 1);
-	for (int i = 0; i < this->length; i++)
+	int newLength = this->length+1;
+	char* newStr = new char[newLength + 1]; 
+
+	for (int i = 0; i < this->length; i++) 
 	{
-		temp.str[i] = this->str[i];
+		newStr[i] = this->str[i];
 	}
-	temp.str[this->length-1] = '0';
-	temp.str[this->length ] = '\0';
-	return temp;
+
+	newStr[this->length] = '0';
+
+	newStr[newLength] = '\0';
+	delete[] this->str;
+	this->str = newStr;
+	this->length = newLength;
+
+	return *this;
 }
 
-MyString MyString::operator--(int)
+MyString& MyString::operator--()
 {
-	MyString temp(this->length - 1);
-	for (int i = 0; i < this->length-2; i++)
+	int newLength = this->length - 1;
+	char* newStr = new char[newLength  + 1];
+
+	for (int i = 0; i < this->length; i++)
 	{
-		temp.str[i] = this->str[i];
+		newStr[i] = this->str[i];
 	}
-	temp.str[this->length-2] = '\0';
-	return temp;
+
+	newStr[newLength] = '\0';
+	delete[] this->str;
+	this->str = newStr;
+	this->length = newLength;
+
+	return *this;
 }
 
 MyString& MyString::operator+=(int b)
 {
 	int l = this->length + b;
-	char* s = new char[l+1];
+	char* s = new char[l + 1];
 
 	for (int i = 0; i < this->length; i++) 
 	{
 		s[i] = this->str[i];
 	}
-	for (int i = this->length; i < l; i++) 
+	for (int i = this->length; i < l+1; i++) 
 	{
 		s[i] = '0';
 	}
@@ -199,29 +216,50 @@ MyString& MyString::operator+=(int b)
 	return *this;
 }
 
-MyString MyString::operator-=(int b)
+MyString& MyString::operator-=(int b)
 {
-	return MyString();
+	if (b >= this->length) 
+	{
+		delete[] this->str;
+		this->str = new char[1];  
+		this->str[0] = '\0';
+		this->length = 0;
+		return *this;
+	}
+	int l = this->length - b;
+	char* s = new char[l+1];
+
+	for (int i = 0; i < l; i++)
+	{
+		s[i] = this->str[i];
+	}
+	s[l] = '\0';
+
+	delete[] this->str;
+	this->str = s;
+	this->length = l;
+
+	return *this;
 }
 
 bool MyString::operator>(MyString& b)
 {
-	return false;
+	return this->length > b.length;
 }
 
 bool MyString::operator<(MyString& b)
 {
-	return false;
+	return this->length < b.length;
 }
 
 bool MyString::operator==(MyString& b)
 {
-	return false;
+	return this->length == b.length;
 }
 
 bool MyString::operator!=(MyString& b)
 {
-	return false;
+	return this->length != b.length;
 }
 
 
