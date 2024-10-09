@@ -23,9 +23,9 @@ int main()
 
 
 	++line2;
-	--line;
-	line += 6;
-	line -= 4;
+	//--line;
+	//line += 6;
+	//line -= 4;
 	cout << "Length: " << line.MyStrlen() << endl;
 	cout << "Length: " << line2.MyStrlen() << endl;
 	line.Print();
@@ -54,4 +54,8 @@ int main()
 	cout << "Length: " << line.MyStrlen() << endl;
 	line.Print();
 
+
+	MyString line3;
+	line3();
+	line3.Print();
 }

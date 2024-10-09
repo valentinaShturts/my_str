@@ -28,5 +28,13 @@ public:
 	bool operator<(MyString& b);
 	bool operator==(MyString& b);
 	bool operator!=(MyString& b);
+	char& operator[](const unsigned int index);
+	MyString& operator()();
 };
 
+MyString& operator+(MyString& a, char b);
+MyString& operator+(char b, MyString& a);
+MyString& operator+(MyString& a, const int b);
+MyString& operator+(const int b, MyString& a);
+MyString& operator++(MyString& p);
+MyString& operator++(MyString& a, int);
