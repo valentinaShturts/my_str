@@ -1,7 +1,4 @@
 ﻿#include "MyString.h"
-#include <iostream>
-#include <cstring>
-using namespace std;
 
 int MyString::obj_сount = 0;
 
@@ -33,6 +30,21 @@ MyString::~MyString()
 	obj_сount--;
 }
 
+MyString& MyString::operator=(const MyString& right)
+{
+	if (this != &right) 
+	{
+		delete[] str; 
+
+		str = new char[right.length+1];
+		length = right.length;
+
+		strcpy_s(this->str, this->length + 1, right.str);
+	}
+
+	return *this;
+}
+
 int MyString::GetCount() const
 {
 	return obj_сount;
@@ -42,7 +54,9 @@ void MyString::Input()
 {
 	char* input_line = new char[100];
 	cout << "Enter string: ";
-	cin >> input_line;
+	cin.getline(input_line, 100);
+
+	delete[] str;
 
 	length = strlen(input_line);
 	str = new char[length+1];
@@ -92,7 +106,7 @@ int MyString::MyChr(char c)
 	return -1;
 }
 
-int MyString::MyStrlen()
+int MyString::MyStrlen() const
 {
 	return length;
 }
@@ -397,4 +411,19 @@ MyString& operator++(MyString& a)
 	a.MyStrcpy(c);
 
 	return a;
+}
+
+ostream& operator<<(ostream& os, const MyString& obj)
+{
+	os << "Size: " << obj.MyStrlen() << endl;
+	os << "String: ";
+	obj.Print();
+	os << endl;
+	return os;
+}
+
+istream& operator>>(istream& is, MyString& obj)
+{
+	obj.Input();
+	return is;
 }

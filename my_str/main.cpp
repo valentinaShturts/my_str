@@ -7,26 +7,24 @@ using namespace std;
 int main()
 {
 	MyString line;
-	line();
-	cout << "Length: " << line.MyStrlen() << endl;
-	line.Print();
+	cin >> line;
+	cout << line;
 
 	MyString line2;
-	line2.MyStrcpy(line);
-	cout << "Length: " << line2.MyStrlen() << endl;
-	line2.Print();
+	line2 = line;
+	cout << line2;
 
 	line + 'T';
 	'T' + line2;
-	line.Print();
-	line2.Print();
+	cout << line;
+	cout << line2;
 
 	line + 2;
 	4 + line2;
 	line++;
 	++line2;
-	line.Print();
-	line2.Print();
+	cout << line;
+	cout << line2;
 
 	//line.Print();
 	//cout << "index of 'a': " << line.MyChr('a') << endl;
