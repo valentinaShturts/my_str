@@ -44,9 +44,9 @@ void MyString::Input()
 	cout << "Enter string: ";
 	cin >> input_line;
 
-	length = strlen(input_line) + 1;
-	str = new char[length];
-	strcpy_s(str, length, input_line);
+	length = strlen(input_line);
+	str = new char[length+1];
+	strcpy_s(str, length+1, input_line);
 
 	delete[] input_line;
 }
@@ -348,9 +348,9 @@ MyString& operator+(const int b, MyString& a)
 		newStr[i] = '0';
 	}
 
-	for (int i = b; i < newLength + 1; i++)
+	for (int i = 0; i < newLength - b; i++)
 	{
-		newStr[i] = a[i];
+		newStr[i+b] = a[i];
 	}
 
 	newStr[newLength] = '\0';
@@ -361,7 +361,7 @@ MyString& operator+(const int b, MyString& a)
 	return a;
 }
 
-MyString& operator++(MyString& a)
+MyString& operator++(MyString& a, int)
 {
 	int newLength = a.MyStrlen() + 1;
 	char* newStr = new char[newLength + 1];
@@ -380,7 +380,7 @@ MyString& operator++(MyString& a)
 	return a;
 }
 
-MyString& operator++(MyString& a, int)
+MyString& operator++(MyString& a)
 {
 	int newLength = a.MyStrlen() + 1;
 	char* newStr = new char[newLength + 1];

@@ -19,11 +19,11 @@ public:
 	void MyStrCat(MyString& b);
 	void MyDelChr(char c);
 	int MyStrCmp(MyString& b);
-	MyString operator+(MyString& b);
+	/*MyString operator+(MyString& b);
 	MyString& operator++();
 	MyString& operator--();
 	MyString& operator+=(int b);
-	MyString& operator-=(int b);
+	MyString& operator-=(int b);*/
 	bool operator>(MyString& b);
 	bool operator<(MyString& b);
 	bool operator==(MyString& b);
@@ -36,5 +36,5 @@ MyString& operator+(MyString& a, char b);
 MyString& operator+(char b, MyString& a);
 MyString& operator+(MyString& a, const int b);
 MyString& operator+(const int b, MyString& a);
-MyString& operator++(MyString& p);
 MyString& operator++(MyString& a, int);
+MyString& operator++(MyString& p);
