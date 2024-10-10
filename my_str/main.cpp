@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	MyString line("dfgadfg");
+	MyString line;
 	cout << "Length: " << line.MyStrlen() << endl;
 
 	MyString line2;
