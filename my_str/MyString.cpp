@@ -30,6 +30,20 @@ MyString::~MyString()
 	obj_сount--;
 }
 
+MyString::MyString(initializer_list<char> a)
+{
+	cout << "initializer_list constructor!" << endl;
+	cout << "Size = " << a.size() << endl;
+	length = a.size();
+	str = new char[length];
+	for (auto x = a.begin(); x != a.end(); x++)
+	{
+		*str = *x;
+		str++;
+	}
+	str -= length;
+}
+
 MyString& MyString::operator=(const MyString& right)
 {
 	if (this != &right) 

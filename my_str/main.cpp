@@ -6,11 +6,10 @@ using namespace std;
 
 int main()
 {
-	MyString line;
-	cin >> line;
+	MyString line{ 'H', 'e', 'l', 'l' };
 	cout << line;
 
-	MyString line2;
+	/*MyString line2;
 	line2 = line;
 	cout << line2;
 
@@ -24,7 +23,7 @@ int main()
 	line++;
 	++line2;
 	cout << line;
-	cout << line2;
+	cout << line2;*/
 
 	//line.Print();
 	//cout << "index of 'a': " << line.MyChr('a') << endl;

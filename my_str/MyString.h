@@ -14,6 +14,7 @@ public:
 	MyString(int size);
 	MyString(const char* s);
 	~MyString();
+	MyString(initializer_list<char> a);
 	MyString& operator=(const MyString& right);
 	int GetCount() const;
 	void Input();
