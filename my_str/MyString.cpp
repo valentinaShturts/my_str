@@ -45,7 +45,7 @@ MyString::MyString(initializer_list<char> a)
 	*str = '\0';
 	str -= length;
 }
-MyString::MyString(MyString&& obj)noexcept
+MyString::MyString(MyString&& obj)
 {
 	length = obj.length;
 	obj.length = 0;
@@ -54,7 +54,7 @@ MyString::MyString(MyString&& obj)noexcept
 	cout << "Move constructor" << endl;
 }
 
-MyString& MyString::operator=(MyString&& obj) noexcept
+MyString& MyString::operator=(MyString&& obj) 
 {
 	if (this == &obj)
 	{

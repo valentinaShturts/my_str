@@ -15,8 +15,8 @@ public:
 	MyString(const char* s);
 	~MyString();
 	MyString(initializer_list<char> a);
-	MyString(MyString&& obj)noexcept;
-	MyString& operator=(MyString&& obj)noexcept;
+	MyString(MyString&& obj);
+	MyString& operator=(MyString&& obj);
 	MyString& operator=(const MyString& right);
 	int GetCount() const;
 	void Input();
