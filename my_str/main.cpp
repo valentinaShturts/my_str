@@ -22,5 +22,5 @@ int main()
 
 	line2 = move(line3);
 	cout << line2;
-
+	return 0;
 }

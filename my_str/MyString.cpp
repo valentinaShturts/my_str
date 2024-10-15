@@ -5,7 +5,7 @@ int MyString::obj_сount = 0;
 MyString::MyString()
 {
 	length = 80;
-	str = new char[length];
+	str = new char[length+1];
 	str[length] = '\0';
 	obj_сount++;
 }
@@ -36,7 +36,7 @@ MyString::MyString(initializer_list<char> a)
 	cout << "initializer_list constructor!" << endl;
 	cout << "Size = " << a.size() << endl;
 	length = a.size();
-	str = new char[length];
+	str = new char[length+1];
 	for (auto x = a.begin(); x != a.end(); x++)
 	{
 		*str = *x;
@@ -45,7 +45,7 @@ MyString::MyString(initializer_list<char> a)
 	*str = '\0';
 	str -= length;
 }
-MyString::MyString(MyString&& obj)
+MyString::MyString(MyString&& obj)noexcept
 {
 	length = obj.length;
 	obj.length = 0;
@@ -54,16 +54,18 @@ MyString::MyString(MyString&& obj)
 	cout << "Move constructor" << endl;
 }
 
-MyString& MyString::operator=(MyString&& obj)
+MyString& MyString::operator=(MyString&& obj) noexcept
 {
 	if (this == &obj)
 	{
 		return *this;
 	}
 	delete[]str;
-	obj.length = 0;
 	str = obj.str;
+	length = obj.length;
+
 	obj.str = nullptr;
+	obj.length = 0;
 	cout << "Move =" << endl;
 	return *this;
 }
@@ -453,7 +455,6 @@ MyString& operator++(MyString& a)
 
 ostream& operator<<(ostream& os, const MyString& obj)
 {
-	os << "Size: " << obj.MyStrlen() << endl;
 	os << "String: ";
 	obj.Print();
 	os << endl;
