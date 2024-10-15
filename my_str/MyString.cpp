@@ -6,6 +6,7 @@ MyString::MyString()
 {
 	length = 80;
 	str = new char[length];
+	str[length] = '\0';
 	obj_сount++;
 }
 
@@ -41,7 +42,30 @@ MyString::MyString(initializer_list<char> a)
 		*str = *x;
 		str++;
 	}
+	*str = '\0';
 	str -= length;
+}
+MyString::MyString(MyString&& obj)
+{
+	length = obj.length;
+	obj.length = 0;
+	str = obj.str;
+	obj.str = nullptr;
+	cout << "Move constructor" << endl;
+}
+
+MyString& MyString::operator=(MyString&& obj)
+{
+	if (this == &obj)
+	{
+		return *this;
+	}
+	delete[]str;
+	obj.length = 0;
+	str = obj.str;
+	obj.str = nullptr;
+	cout << "Move =" << endl;
+	return *this;
 }
 
 MyString& MyString::operator=(const MyString& right)
